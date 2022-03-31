@@ -4,10 +4,11 @@ function postCard($row, $pics)
 ?>
 	<div class="card w-100 mb-3">
 		<div class="card-body">
-			<div class="image" style="background-image: url(<?= $row['pfp'] ?>); width: 35px; height: 35px; background-size: contain; display: inline-block; border-radius: 100px;"><span style="vertical-align: middle;"> <?= $row['login'] ?></span></div>
+			<div class="image" style="background-image: url(<?= $row['pfp'] ?>); width: 35px; height: 35px; background-size: contain; display: inline-block; border-radius: 100px; vertical-align: middle;"></div>
+			<span class="ms-2"> <a class="post-user" href="?page=details&user-id=<?=$row['user_id'] ?>"><?= $row['login'] ?></a></span>
 
-			<h5 class="card-title"><?= $row['title'] ?></h5>
-			<p class="card-text"><?= $row['text'] ?></p>
+			<h5 class="card-title"><a href="?page=post&post-id=<?=$row['post_id'] ?>" class="post-title"><?= $row['title'] ?></a></h5>
+			<p class="card-text"><?= nl2br($row['text']) ?></p>
 		</div>
 		<?php
 		if (!empty($pics)) {
@@ -46,12 +47,13 @@ function postCard($row, $pics)
 		}
 		?>
 		<div class="btn-group" role="group">
-		<?php if ($row['user_id'] == $_SESSION['user_id'] || is_admin()) { ?>
-			<a href="?page=post-edit&post-id=<?= $row['post_id'] ?>" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edytuj</a>
-		<?php } ?>
-  <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-dots"></i> Komentarze</button>
-  <button type="button" class="btn btn-outline-primary">Right</button>
-</div>
+			<?php if ($_GET['page'] != 'post') { ?>
+				<a href="?page=post&post-id=<?= $row['post_id'] ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots"></i> Komentarze</a>
+			<?php } ?>
+			<?php if (can_edit($row['user_id'])) { ?>
+				<a href="?page=post-edit&post-id=<?= $row['post_id'] ?>" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edytuj</a>
+			<?php } ?>
+		</div>
 
 	</div>
 <?php

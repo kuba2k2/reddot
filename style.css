@@ -1,3 +1,21 @@
 .form-login {
 	max-width: 500px;
 }
+
+.post-title {
+	color: black;
+	text-decoration: none;
+}
+
+.post-title:hover {
+	color: black;
+	text-decoration: underline;
+}
+
+.post-user {
+	text-decoration: none;
+}
+
+.post-user:hover {
+	text-decoration: underline;
+}
