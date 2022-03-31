@@ -29,6 +29,12 @@
 	position: relative;
 	transition: all 0.3s ease;
 }
+
+.profile-pic label.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
 .profile-pic input {
 	display: none;
 }
@@ -41,13 +47,14 @@
 	border-radius: 100px;
 	z-index: 0;
 }
-.profile-pic .-label {
+.profile-pic .upload-label {
 	cursor: pointer;
 	height: 165px;
 	width: 165px;
 }
-.profile-pic:hover .-label {
+.profile-pic:hover .upload-label {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(0, 0, 0, .8);

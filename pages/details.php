@@ -5,9 +5,7 @@ $stmt->execute([
 	isset($_GET['user-id']) ? $_GET['user-id'] : $_SESSION['user_id'],
 ]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-if (empty($row['pfp'])) {
-	$row['pfp'] = 'user.png';
-}
+fix_pfp($row);
 
 $dog = 'brak psa :(  (ale ma kota) :)';
 switch (intval($row['dog'])) {
@@ -64,19 +62,19 @@ if ($edit) {
 
 ?>
 <div class="container rounded bg-white mt-5 mb-5">
+	<?= ($edit ? '<form method="post" enctype="multipart/form-data">' : '') ?>
 	<div class="row">
 		<div class="col-md-4 border-right">
 			<div class="d-flex flex-column align-items-center text-center p-3 py-5">
-				<div class="profile-pic">\
-					<label class="-label" for="file">
-						<span class="glyphicon glyphicon-camera"></span>
-						<span>Change Image</span>
+				<div class="profile-pic">
+					<label class="upload-label <?= ($edit ? '' : 'hidden') ?>" for="file" <i class="bi bi-camera"></i><br>
+						<span>Zmień awatar</span>
 					</label>
-					<input id="file" type="file" onchange="loadFile(event)" />
-					<img src="<?= $row["pfp"] ?>" id="output" width="200" />
+					<input id="file" type="file" onchange="loadFile(event)" name="user-picture" />
+					<img src="<?= $row["pfp"] /* ඞ */ ?>" id="profile-pic" />
 					<script>
 						var loadFile = function(event) {
-							var image = document.getElementById("output");
+							var image = document.getElementById("profile-pic");
 							image.src = URL.createObjectURL(event.target.files[0]);
 						};
 					</script>
@@ -96,27 +94,26 @@ if ($edit) {
 				<div class="d-flex justify-content-between align-items-center mb-3">
 					<h4 class="text-right"><?= ($edit ? 'Edytuj swój profil' : 'Profil użytkownika') ?></h4>
 				</div>
-				<?= ($edit ? '<form method="post">' : '') ?>
 				<div class="row mt-3">
 					<div class="col-md-6">
 						<label class="labels">Imię</label>
-						<input type="text" class="form-control" <?= $value.'="'.$row['name'].'"' ?> <?= $disabled ?> name="user-name">
+						<input type="text" class="form-control" <?= $value . '="' . $row['name'] . '"' ?> <?= $disabled ?> name="user-name">
 					</div>
 					<div class="col-md-6">
 						<label class="labels">Nazwisko</label>
-						<input type="text" class="form-control" <?= $value.'="'.$row['surname'].'"' ?> <?= $disabled ?> name="user-surname">
+						<input type="text" class="form-control" <?= $value . '="' . $row['surname'] . '"' ?> <?= $disabled ?> name="user-surname">
 					</div>
 					<div class="col-md-12">
 						<label class="labels">Adres</label>
-						<input type="text" class="form-control" <?= $value.'="'.$row['address'].'"' ?> <?= $disabled ?> name="user-address">
+						<input type="text" class="form-control" <?= $value . '="' . $row['address'] . '"' ?> <?= $disabled ?> name="user-address">
 					</div>
 					<div class="col-md-12">
 						<label class="labels">Email</label>
-						<input type="text" class="form-control" <?= $value.'="'.$row['email'].'"' ?> <?= $disabled ?> name="user-email">
+						<input type="text" class="form-control" <?= $value . '="' . $row['email'] . '"' ?> <?= $disabled ?> name="user-email">
 					</div>
 					<div class="col-md-12">
 						<label class="labels">Login</label>
-						<input type="text" class="form-control" <?= $value.'="'.$row['login'].'"' ?> <?= $disabled ?> name="user-login">
+						<input type="text" class="form-control" <?= $value . '="' . $row['login'] . '"' ?> <?= $disabled ?> name="user-login">
 					</div>
 					<div class="col-md-12">
 						<label class="labels">Utworzono</label>
@@ -141,10 +138,10 @@ if ($edit) {
 				<?php } elseif (can_edit($row['user_id'])) { ?>
 					<a class="btn btn-outline-primary mt-3 float-end" href="?page=details&edit&user-id=<?= $row['user_id'] ?>">Edytuj</a>
 				<?php } ?>
-				<?= ($edit ? '</form>' : '') ?>
 			</div>
 		</div>
 	</div>
+	<?= ($edit ? '</form>' : '') ?>
 </div>
 <!--
 

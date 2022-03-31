@@ -39,6 +39,24 @@ function is_form_complete($fields)
 	return true;
 }
 
+function fix_pfp(&$user)
+{
+	if (empty($user['pfp'])) {
+		$user['pfp'] = 'user.png';
+	}
+}
+
+function update_session($user)
+{
+	$_SESSION['logged_in'] = true;
+	$_SESSION['user_id'] = $user['user_id'];
+	$_SESSION['login'] = $user['login'];
+	$_SESSION['role'] = $user['role'];
+	$_SESSION['name'] = $user['name'];
+	$_SESSION['surname'] = $user['surname'];
+	$_SESSION['pfp'] = $user['pfp'];
+}
+
 function add_message($type, $code, $text, $field = null)
 {
 	// dodaj wiadomość do wyświetlenia na stronie

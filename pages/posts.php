@@ -27,11 +27,9 @@
 			$stmt2 = $db->prepare('Select * from `pics` where `post_id` = ?;');
 			$stmt2->execute([$row['post_id']]);
 			$pics = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-			if (empty($row['pfp'])) {
-				$row['pfp'] = 'user.png';
-			}
 
-			postCard($row, $pics);
+			fix_pfp($row);
+			postCard($row, $pics, '300px');
 		}
 
 		if (!$found_rows) {

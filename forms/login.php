@@ -19,12 +19,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 	} else {
 		$assoc = $stmt->fetch(PDO::FETCH_ASSOC);
 		add_message("success", 3, "GRATULACJE UŻYTKOWNIKU");
-		$_SESSION['logged_in'] = true;
-		$_SESSION['user_id'] = $assoc['user_id'];
-		$_SESSION['login'] = $assoc['login'];
-		$_SESSION['role'] = $assoc['role'];
-		$_SESSION['name'] = $assoc['name'];
-		$_SESSION['surname'] = $assoc['surname'];
+		update_session($assoc);
 		$stmt = $db->prepare('UPDATE users SET logindate = CURRENT_TIMESTAMP() WHERE user_id = ?;');
 		$stmt->execute([$_SESSION['user_id']]);
 		header('Location: index.php');
