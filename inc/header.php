@@ -16,6 +16,13 @@
 <body class="d-flex flex-column h-100 container">
 
 	<?php
+	$menu = [
+		'?page=post-edit' => '<i class="bi bi-plus-square"></i> Add Post',
+		'?page=details' => 'Account details',
+		'?page=posts' => 'Your poosts',
+		'?page=details&edit' => 'Settings',
+		'?logout' => 'Log out',
+	];
 	if ($_GET['page'] != 'welcome') {
 	?>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light d-lg-none">
@@ -26,12 +33,11 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="?page=post-edit"><i class="bi bi-plus-square"></i> Add Post</a>
-						<li class="nav-item"><a class="nav-link" href="#">Change icon</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Account details</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Your poosts</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
-						<li class="nav-item"><a class="nav-link" href="?logout">Log out</a></li>
+						<?php
+						foreach ($menu as $url => $text) {
+							echo '<li class="nav-item"><a class="nav-link" href="'.$url.'">'.$text.'</a>';
+						}
+						?>
 					</ul>
 					<form class="d-flex">
 						<input class="form-control me-2" type="search" placeholder="Search" style="flex-grow: 1;width: unset;">
@@ -52,11 +58,11 @@
 						Account
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="#">Change icon</a></li>
-						<li><a class="dropdown-item" href="#">Account details</a></li>
-						<li><a class="dropdown-item" href="#">Your poosts</a></li>
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="?logout">Log out</a></li>
+						<?php
+						foreach ($menu as $url => $text) {
+							echo '<li><a class="dropdown-item" href="'.$url.'">'.$text.'</a></li>';
+						}
+						?>
 					</ul>
 				</div>
 			</form>
