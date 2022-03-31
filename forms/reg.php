@@ -3,33 +3,49 @@
 db_connect();
 
 $fields = [
-    'reg-username',
-    'reg-email',
-    'reg-password',
-    'reg-passwordconfirm',
-    'reg-name',
-    'reg-surname',
-    'reg-color',
-    'reg-address',
+	'reg-username',
+	'reg-email',
+	'reg-password',
+	'reg-passwordconfirm',
+	'reg-name',
+	'reg-surname',
+	'reg-color',
+	'reg-address',
 ];
 
 if (!is_form_complete($fields)) {
-    if ($_POST['reg-password'] == $_POST['reg-passwordconfirm']) {
-        $stmt = $db->prepare("INSERT INTO `users`(`email`, `login`, `password`, `name`, `surname`, `address`, `dog`)
-        VALUES (?,?,?,?,?,?,?)"); // ale to fajnewiem
-        $stmt->execute([
-            $_POST['reg-email'],
-            $_POST['reg-username'],
-            $_POST['reg-password'],
-            $_POST['reg-name'],
-            $_POST['reg-surname'],
-            $_POST['reg-address'],
-            $_POST['reg-color'],
-        ]);
-        add_message('success', 3, 'Zostałeś zajerestrowany');
-    } else {
-        add_message('danger', 6, "Hasła nie są takie same");
-    }
-} else {
-    add_message('danger', 7, 'Brakujące pola w formularzu!');
+	add_message('danger', 7, 'Brakujące pola w formularzu!');
+	return;
 }
+
+if ($_POST['reg-password'] != $_POST['reg-passwordconfirm']) {
+	add_message('danger', 6, "Hasła nie są takie same");
+	return;
+}
+
+$stmt = $db->prepare("INSERT INTO `users`(`email`, `login`, `password`, `name`, `surname`, `address`, `dog`)
+		VALUES (?,?,?,?,?,?,?)"); // ale to fajnewiem
+
+try {
+	$stmt->execute([
+		$_POST['reg-email'],
+		$_POST['reg-username'],
+		$_POST['reg-password'],
+		$_POST['reg-name'],
+		$_POST['reg-surname'],
+		$_POST['reg-address'],
+		$_POST['reg-color'],
+	]);
+} catch (PDOException $e) {
+	if ($e->errorInfo[1] == 1062) {
+		add_message('danger', 6, "Taki użytkownik już istnieje");
+		return;
+	} else {
+		add_message('danger', 6, "Nieznany błąd podczas tworzenia konta");
+		return;
+	}
+}
+
+add_message('success', 3, 'Zostałeś zajerestrowany');
+header('Location: ?page=welcome');
+exit;
