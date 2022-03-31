@@ -100,26 +100,26 @@ if ($edit) {
 				<div class="row mt-3">
 					<div class="col-md-6">
 						<label class="labels">Imię</label>
-						<input type="text" class="form-control" <?= $value ?>="<?= $row["name"] ?>" <?= $disabled ?>>
+						<input type="text" class="form-control" <?= $value.'="'.$row['name'].'"' ?> <?= $disabled ?> name="user-name">
 					</div>
 					<div class="col-md-6">
 						<label class="labels">Nazwisko</label>
-						<input type="text" class="form-control" <?= $value ?>="<?= $row["surname"] ?>" <?= $disabled ?>>
+						<input type="text" class="form-control" <?= $value.'="'.$row['surname'].'"' ?> <?= $disabled ?> name="user-surname">
 					</div>
 					<div class="col-md-12">
 						<label class="labels">Adres</label>
-						<input type="text" class="form-control" <?= $value ?>="<?= $row["address"] ?>" <?= $disabled ?>>
+						<input type="text" class="form-control" <?= $value.'="'.$row['address'].'"' ?> <?= $disabled ?> name="user-address">
 					</div>
 					<div class="col-md-12">
 						<label class="labels">Email</label>
-						<input type="text" class="form-control" <?= $value ?>="<?= $row["email"] ?>" <?= $disabled ?>>
+						<input type="text" class="form-control" <?= $value.'="'.$row['email'].'"' ?> <?= $disabled ?> name="user-email">
 					</div>
 					<div class="col-md-12">
 						<label class="labels">Login</label>
-						<input type="text" class="form-control" <?= $value ?>="<?= $row["login"] ?>" <?= $disabled ?>>
+						<input type="text" class="form-control" <?= $value.'="'.$row['login'].'"' ?> <?= $disabled ?> name="user-login">
 					</div>
 					<div class="col-md-12">
-						<label class="labels">Utoworzono</label>
+						<label class="labels">Utworzono</label>
 						<input type="text" class="form-control" placeholder="<?= $row["createdate"] ?>" disabled>
 					</div>
 					<div class="col-md-12">
