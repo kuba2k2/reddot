@@ -24,6 +24,21 @@ function is_admin()
 	return is_logged_in() && $_SESSION['role'] == 'ADMIN';
 }
 
+function can_edit($user_id)
+{
+	return is_logged_in() && (is_admin() || $user_id == $_SESSION["user_id"]);
+}
+
+function is_form_complete($fields)
+{
+	foreach ($fields as $field) {
+		if (!isset($_POST[$field])) {
+			return false;
+		}
+	}
+	return true;
+}
+
 function add_message($type, $code, $text, $field = null)
 {
 	// dodaj wiadomość do wyświetlenia na stronie
