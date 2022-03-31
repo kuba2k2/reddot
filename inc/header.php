@@ -70,5 +70,5 @@
 	<?php } ?>
 
 	<?php
-	show_messages();
+	show_messages($_GET['page'] == 'welcome' ? 'mt-3' : '');
 	?>

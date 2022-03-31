@@ -50,7 +50,7 @@ function add_message($type, $code, $text, $field = null)
 	];
 }
 
-function show_messages()
+function show_messages($cls)
 {
 	if (!isset($_SESSION['messages'])) {
 		$_SESSION['messages'] = [];
@@ -58,7 +58,7 @@ function show_messages()
 	}
 	foreach ($_SESSION['messages'] as $message) {
 ?>
-		<div class="alert alert-<?= $message['type'] ?>" role="alert">
+		<div class="alert alert-<?= $message['type'] ?> <?= $cls ?>" role="alert">
 			<?= $message['text'] ?>
 		</div>
 <?php
