@@ -14,7 +14,7 @@
 			$pics = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 			fix_pfp($row);
 
-			postCard($row, $pics);
+			postCard($row, $pics, '300px');
 		}
 		?>
 

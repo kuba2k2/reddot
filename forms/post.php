@@ -32,12 +32,46 @@ if (isset($_POST['form-post-remove']) && isset($_POST['post-remove-id'])) {
 			is_admin(),
 			$_POST['post-edit-id'],
 		]);
+		$post_id = $_POST['post-edit-id'];
 	} else {
 		$stmt = $db->prepare('INSERT INTO posts (user_id, title, text) VALUES (?, ?, ?);');
 		$stmt->execute([
 			$_SESSION['user_id'],
 			$_POST['post-title'],
 			$_POST['post-text'],
+		]);
+		$post_id = $db->lastInsertId('post_id');
+	}
+
+	foreach ($_FILES as $file) {
+		$basename = basename($file["name"]);
+		$basename = preg_replace('/[^A-z0-9-_.]/', '', $basename);
+		$target_file = 'pics/' . time() . '_' . $basename;
+		$image_info = getimagesize($file["tmp_name"]);
+
+		if ($image_info === false && (!str_ends_with($basename, '.svg'))) {
+			add_message('danger', 3, 'Obrazek '.$basename.' jest nieprawidłowy');
+			continue;
+		}
+
+		if ($file["size"] > 10000000) {
+			add_message('danger', 3, 'Obrazek '.$basename.' jest zbyt potężny');
+			continue;
+		}
+
+		if (!file_exists('pics')) {
+			mkdir('pics');
+		}
+
+		if (!move_uploaded_file($file["tmp_name"], $target_file)) {
+			add_message('danger', 3, 'Nie udało się dodać obrazka '.$basename.', spróbuj ponownie później');
+			continue;
+		}
+
+		$stmt = $db->prepare("INSERT INTO pics (post_id, filename) VALUES (?, ?);");
+		$stmt->execute([
+			$post_id,
+			$target_file,
 		]);
 	}
 

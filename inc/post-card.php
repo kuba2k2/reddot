@@ -1,5 +1,5 @@
 <?php
-function postCard($row, $pics)
+function postCard($row, $pics, $height)
 {
 ?>
 	<div class="card w-100 mb-3">
@@ -28,7 +28,7 @@ function postCard($row, $pics)
 					foreach ($pics as $number => $pic) {
 					?>
 						<div class="carousel-item <?= $number ? '' : 'active' ?>">
-							<div style="background-image: url(<?= $pic['filename'] ?>); background-size: cover; height: 300px; background-repeat: no-repeat;" class="d-block w-100" alt="..."></div>
+							<div style="background-image: url(<?= $pic['filename'] ?>); background-size: contain; height: <?=$height ?>; background-repeat: no-repeat;background-position: center;" class="d-block w-100" alt="..."></div>
 						</div>
 					<?php
 					}

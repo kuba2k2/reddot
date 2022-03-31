@@ -95,3 +95,12 @@
 	padding: 0.2em;
 	height: 2em;
 }
+
+.bi.card-img-top {
+	font-size: 72px;
+	text-align: center;
+}
+
+.min-h-100 {
+	min-height: 100%;
+}

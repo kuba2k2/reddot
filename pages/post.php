@@ -1,5 +1,5 @@
 <div class="row justify-content-md-center">
-	<div class="col-md-8">
+	<div class="col-md-12 col-lg-10 col-xl-8">
 		<?php
 		db_connect();
 		$stmt = $db->prepare('SELECT * from `posts` join `users` USING(`user_id`) WHERE post_id = ? order by `postdate` desc');
@@ -18,6 +18,7 @@
 		$pics = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
 		fix_pfp($row);
+		postCard($row, $pics, '600px');
 		$user = $row;
 
 		?>
@@ -45,33 +46,33 @@
 			$stmt->execute([$user['post_id']]); //ඞ
 			if ($stmt->rowCount()) {
 			?>
-			<div class="card-body p-4">
-				<div class="col">
-					<?php
-					$cls = '';
+				<div class="card-body p-4">
+					<div class="col">
+						<?php
+						$cls = '';
 
-					while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+						while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 							fix_pfp($row);
-					?>
+						?>
 							<div class="d-flex flex-start <?= $cls ?>">
 								<div class="rounded-circle shadow-1-strong me-3 user-image big" style="background-image: url(<?= $row['pfp'] ?>);"></div>
 								<div class="flex-grow-1 flex-shrink-1 comment-text">
-								<div class="d-flex justify-content-between align-items-center">
-									<p class="mb-1">
-										<?= $row['login'] ?> <span class="small">- <?= $row['date_added'] ?></span>
+									<div class="d-flex justify-content-between align-items-center">
+										<p class="mb-1">
+											<?= $row['login'] ?> <span class="small">- <?= $row['date_added'] ?></span>
+										</p>
+									</div>
+									<p class="small mb-0">
+										<?= nl2br($row['text']) ?>
 									</p>
 								</div>
-								<p class="small mb-0">
-									<?= nl2br($row['text']) ?>
-								</p>
 							</div>
-						</div>
-					<?php
-						$cls = 'mt-4';
-					}
-					?>
+						<?php
+							$cls = 'mt-4';
+						}
+						?>
+					</div>
 				</div>
-			</div>
 			<?php
 			}
 			?>

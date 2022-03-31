@@ -8,7 +8,7 @@
 			$user_id = $_GET['user-id'];
 		}
 
-		$stmt = $db->prepare('SELECT * from `posts` join `users` USING(`user_id`) WHERE user_id = ? order by `postdate` desc');
+		$stmt = $db->prepare('SELECT posts.*, users.*, COUNT(com_id) AS com_count FROM posts JOIN users USING(user_id) LEFT JOIN comments USING(post_id) WHERE posts.user_id = ? GROUP BY post_id ORDER BY postdate DESC;');
 		$stmt->execute([$user_id]);
 		require_once 'inc/post-card.php';
 
