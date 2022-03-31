@@ -1,8 +1,8 @@
 <!-- http://vps.szkolny.eu:60080/zsl/reddot/ -->
 <!-- http://vps.szkolny.eu:60080/phpmyadmin/ -->
-<div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-	<div class="row">
-		<div class="col-4 d-flex justify-content-center flex-column">
+<div class="container h-100 d-flex justify-content-center flex-column">
+	<div class="row h-100">
+		<div class="col-12 col-md-4 d-flex justify-content-center flex-column">
 			<img src="lepszelogo.png" alt="Logo" class="img-thumbnail mb-3">
 			<h3>Zaloguj się</h3>
 				<form method="post">
@@ -19,8 +19,8 @@
 				</div>
 			</form>
 		</div>
-		<div class="col-2"></div>
-		<div class="col-6">
+		<div class="col-md-2"></div>
+		<div class="col-md-6 col-12 d-flex justify-content-center flex-column">
 			<h3>Zarejestruj się</h3>
 			<form method="post">
 				<div class="form-floating mb-3">

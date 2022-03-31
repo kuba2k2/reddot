@@ -1,4 +1,5 @@
-<footer class="footer mt-auto py-3 bg-light">
+</div>
+<footer class="footer py-3 bg-light mt-auto">
 	<div class="container">
 		<span class="text-muted">Jakieś copyright i inne prawa rodo itd ciasteczka &copy; <?= date('Y') ?></span>
 	</div>
