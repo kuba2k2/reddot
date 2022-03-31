@@ -23,6 +23,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         $_SESSION['role'] = $assoc['role'];
         $_SESSION['name'] = $assoc['name'];
         $_SESSION['surname'] = $assoc['surname'];
+        $stmt = $db->prepare('UPDATE users SET logindate = CURRENT_TIMESTAMP() WHERE user_id = ?;');
+        $stmt->execute([$_SESSION['user_id']]);
         header('Location: index.php');
         exit;
     }
