@@ -4,10 +4,10 @@ function postCard($row, $pics)
 ?>
 	<div class="card w-100 mb-3">
 		<div class="card-body">
-			<div class="image" style="background-image: url(<?= $row['pfp'] ?>); width: 35px; height: 35px; background-size: contain; display: inline-block; border-radius: 100px; vertical-align: middle;"></div>
-			<span class="ms-2"> <a class="post-user" href="?page=details&user-id=<?=$row['user_id'] ?>"><?= $row['login'] ?></a></span>
+			<div class="user-image image" style="background-image: url(<?= $row['pfp'] ?>);"></div>
+			<span class="ms-2"> <a class="post-user" href="?page=details&user-id=<?= $row['user_id'] ?>"><?= $row['login'] ?></a></span>
 
-			<h5 class="card-title"><a href="?page=post&post-id=<?=$row['post_id'] ?>" class="post-title"><?= $row['title'] ?></a></h5>
+			<h5 class="card-title"><a href="?page=post&post-id=<?= $row['post_id'] ?>" class="post-title"><?= $row['title'] ?></a></h5>
 			<p class="card-text"><?= nl2br($row['text']) ?></p>
 		</div>
 		<?php
@@ -36,11 +36,11 @@ function postCard($row, $pics)
 				</div>
 				<button class="carousel-control-prev" type="button" data-bs-target="#post-<?= $row['post_id'] ?>-photos" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
+					<span class="visually-hidden">Poprzedni</span>
 				</button>
 				<button class="carousel-control-next" type="button" data-bs-target="#post-<?= $row['post_id'] ?>-photos" data-bs-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
+					<span class="visually-hidden">Następny</span>
 				</button>
 			</div>
 		<?php
@@ -48,10 +48,17 @@ function postCard($row, $pics)
 		?>
 		<div class="btn-group" role="group">
 			<?php if ($_GET['page'] != 'post') { ?>
-				<a href="?page=post&post-id=<?= $row['post_id'] ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots"></i> Komentarze</a>
+				<a href="?page=post&post-id=<?= $row['post_id'] ?>" class="btn">
+					<i class="bi bi-chat-dots"></i>
+					<?php if ($row['com_count']) { ?>
+						Komentarze (<?= $row['com_count'] ?>)
+					<?php } else { ?>
+						Napisz komentarz
+					<?php } ?>
+				</a>
 			<?php } ?>
 			<?php if (can_edit($row['user_id'])) { ?>
-				<a href="?page=post-edit&post-id=<?= $row['post_id'] ?>" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edytuj</a>
+				<a href="?page=post-edit&post-id=<?= $row['post_id'] ?>" class="btn"><i class="bi bi-pencil"></i> Edytuj</a>
 			<?php } ?>
 		</div>
 

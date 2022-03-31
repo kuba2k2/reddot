@@ -29,6 +29,7 @@ if (isset($_GET['post-id'])) {
 
 if ($title) { ?>
 	<h1>Edytuj post</h1>
+	<small class="mb-3">użytkownika <a class="a-black" href="?page=details&user-id=<?= $row['user_id'] ?>"><?= $row['login'] ?></a></small>
 <?php } else { ?>
 	<h1>Dodaj post</h1>
 <?php } ?>
