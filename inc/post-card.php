@@ -5,7 +5,12 @@ function postCard($row, $pics, $height)
 	<div class="card w-100 mb-3">
 		<div class="card-body">
 			<div class="user-image image" style="background-image: url(<?= $row['pfp'] ?>);"></div>
-			<span class="ms-2"> <a class="post-user" href="?page=details&user-id=<?= $row['user_id'] ?>"><?= $row['login'] ?></a></span>
+			<span class="ms-2">
+				<a class="post-user" href="?page=details&user-id=<?= $row['user_id'] ?>">
+					<?= $row['name'] . ' ' . $row['surname'] ?>
+					<small>(<?= $row['login'] ?>)</small>
+				</a>
+			</span>
 
 			<h5 class="card-title"><a href="?page=post&post-id=<?= $row['post_id'] ?>" class="post-title"><?= $row['title'] ?></a></h5>
 			<p class="card-text"><?= nl2br($row['text']) ?></p>
@@ -28,7 +33,7 @@ function postCard($row, $pics, $height)
 					foreach ($pics as $number => $pic) {
 					?>
 						<div class="carousel-item <?= $number ? '' : 'active' ?>">
-							<div style="background-image: url(<?= $pic['filename'] ?>); background-size: contain; height: <?=$height ?>; background-repeat: no-repeat;background-position: center;" class="d-block w-100" alt="..."></div>
+							<div style="background-image: url(<?= $pic['filename'] ?>); background-size: contain; height: <?= $height ?>; background-repeat: no-repeat;background-position: center;" class="d-block w-100" alt="..."></div>
 						</div>
 					<?php
 					}

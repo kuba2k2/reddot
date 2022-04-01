@@ -20,6 +20,11 @@
 	text-decoration: underline;
 }
 
+.post-user small, .a-black small {
+	color: grey;
+	font-size: 10px;
+}
+
 .account-dropdown a:hover {
 	text-decoration: none;
 }

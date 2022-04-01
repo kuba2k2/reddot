@@ -67,7 +67,10 @@
 								<div class="flex-grow-1 flex-shrink-1 comment-text">
 									<div class="d-flex justify-content-between align-items-center">
 										<p class="mb-1">
-											<a href="?page=details&user-id=<?= $row['user_id'] ?>" class="a-black"><?= $row['login'] ?></a>
+											<a href="?page=details&user-id=<?= $row['user_id'] ?>" class="a-black">
+												<?= $row['name'] . ' ' . $row['surname'] ?>
+												<small>(<?= $row['login'] ?>)</small>
+											</a>
 											<span class="small">- <?= $row['date_added'] ?></span>
 										</p>
 									</div>
