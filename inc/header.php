@@ -45,8 +45,8 @@ $welcome = $_GET['page'] == 'welcome';
 							}
 							?>
 						</ul>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search" placeholder="Szukaj" style="flex-grow: 1;width: unset;">
+						<form class="d-flex" action="?page=search" method="POST">
+							<input class="form-control me-2" type="search" placeholder="Szukaj" style="flex-grow: 1;width: unset;" name="query" value="<?=(isset($_POST['query']) ? $_POST['query'] : '') ?>">
 							<button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i> Szukaj</button>
 						</form>
 					</div>
@@ -54,9 +54,9 @@ $welcome = $_GET['page'] == 'welcome';
 			</nav>
 
 			<nav class="navbar navbar-light d-none d-lg-block">
-				<form class="container-fluid">
+				<form class="container-fluid" action="?page=search" method="POST">
 					<a class="navbar-brand" href="index.php"><img src="lepszelogo.png" height="35px"></a>
-					<input class="form-control me-2" type="search" placeholder="Szukaj" style="flex-grow: 1;width: unset;">
+					<input class="form-control me-2" type="search" placeholder="Szukaj" style="flex-grow: 1;width: unset;" name="query" value="<?=(isset($_POST['query']) ? $_POST['query'] : '') ?>">
 					<button class="btn btn-outline-success me-2" type="submit"><i class="bi bi-search"></i> Szukaj</button>
 					<a href="?page=post-edit" class="btn btn-primary me-2" type="button"><i class="bi bi-plus-square"></i> Dodaj post</a>
 					<div class="dropdown account-dropdown">

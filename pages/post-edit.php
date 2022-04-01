@@ -27,7 +27,9 @@ if (isset($_GET['post-id'])) {
 	$text = $row['text'];
 }
 
-if ($title) { ?>
+$edit = isset($title);
+
+if ($edit) { ?>
 	<h1>Edytuj post</h1>
 	<small class="mb-3">użytkownika <a class="a-black" href="?page=details&user-id=<?= $row['user_id'] ?>"><?= $row['login'] ?></a></small>
 <?php } else { ?>
@@ -129,7 +131,7 @@ if ($title) { ?>
 		<input type="hidden" name="post-edit-id" value="<?= $postId ?>">
 		<input type="hidden" name="post-remove-id" value="<?= $postId ?>">
 	<?php } ?>
-	<button type="submit" class="btn btn-primary" name="form-post"><?= ($title ? 'Zapisz' : 'Dodaj') ?></button>
+	<button type="submit" class="btn btn-primary" name="form-post"><?= ($edit ? 'Zapisz' : 'Dodaj') ?></button>
 	<?php if ($postId) { ?>
 		<button type="submit" class="btn btn-outline-danger float-end" name="form-post-remove">Usuń post</button>
 	<?php } ?>
