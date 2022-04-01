@@ -2,6 +2,11 @@
 
 db_connect();
 
+if (is_logged_in()) {
+	header('Location: index.php');
+	exit;
+}
+
 if (isset($_POST["email"]) && isset($_POST["password"])) {
 
 	$stmt = $db->prepare('Select * from `users` where (`login` = ? or `email` = ?) and `password` = ?;');
@@ -14,7 +19,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 
 	if ($stmt->rowCount() != 1) {
 		add_message("danger", 2, "Nieprawidłowe dane logowania");
-		header('Location: ?page=welcome');
+		header('Location: index.php');
 		exit;
 	} else {
 		$assoc = $stmt->fetch(PDO::FETCH_ASSOC);

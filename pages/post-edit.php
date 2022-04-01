@@ -4,8 +4,7 @@ $title = null;
 $text = null;
 
 if (!is_logged_in()) {
-	header('Location: index.php');
-	exit;
+	not_logged_in();
 }
 
 if (isset($_GET['post-id'])) {
@@ -18,8 +17,7 @@ if (isset($_GET['post-id'])) {
 	]);
 
 	if ($stmt->rowCount() != 1) {
-		header('Location: index.php');
-		exit;
+		no_access();
 	}
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	$postId = $row['post_id'];

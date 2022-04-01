@@ -3,8 +3,7 @@
 db_connect();
 
 if (!is_logged_in()) {
-	header('Location: index.php');
-	exit;
+	not_logged_in();
 }
 
 if (isset($_POST['form-comment-remove']) && isset($_POST['comment-remove-id']) && isset($_POST['post-id'])) {

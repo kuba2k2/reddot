@@ -8,6 +8,7 @@
 		require_once 'inc/post-card.php';
 
 		if ($stmt->rowCount() != 1) {
+			add_message('warning', 4, 'Ten post nie istnieje.');
 			header('Location: index.php');
 			exit;
 		}

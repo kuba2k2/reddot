@@ -49,8 +49,7 @@ switch (intval($row['dog'])) {
 
 $edit = isset($_GET['edit']);
 if ($edit && !can_edit($row['user_id'])) {
-	header('Location: index.php');
-	exit;
+	no_access();
 }
 
 $disabled = 'disabled';
@@ -133,8 +132,18 @@ if ($edit) {
 				<?php } ?>
 				<?php if ($edit) { ?>
 					<input type="hidden" name="user-edit-id" value="<?= $row['user_id'] ?>">
+					<?php if (is_admin()) { ?>
+						<button type="submit" class="btn btn-outline-danger mt-3" name="form-user-remove" onclick="removeConfirm(event)">Usuń profil</button>
+						<script>
+							function removeConfirm(event) {
+								if (!confirm("Czy na pewno chcesz usunąć konto <?=$row['login'] ?>?\n\nZostaną usunięte wszystkie posty, komentarze oraz zdjęcia tego użytkownika.")) {
+									event.preventDefault();
+								}
+							}
+						</script>
+					<?php } ?>
 					<button type="submit" class="btn btn-outline-success mt-3 float-end" name="form-user-edit">Zapisz</button>
-					<a class="btn btn-outline-danger mt-3 me-3 float-end" href="?page=details&user-id=<?= $row['user_id'] ?>">Anuluj</a>
+					<a class="btn btn-outline-secondary mt-3 me-3 float-end" href="?page=details&user-id=<?= $row['user_id'] ?>">Anuluj</a>
 				<?php } elseif (can_edit($row['user_id'])) { ?>
 					<a class="btn btn-outline-primary mt-3 float-end" href="?page=details&edit&user-id=<?= $row['user_id'] ?>">Edytuj</a>
 				<?php } ?>

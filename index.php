@@ -19,11 +19,16 @@ if (isset($_GET['logout'])) {
 	session_start();
 }
 
-if (!isset($_GET['page'])) {
-	if (is_logged_in()) {
+if (!is_logged_in()) {
+	if (isset($_GET['page'])) {
+		add_message('warning', 2, 'Musisz być zalogowany.');
+		header('Location: index.php');
+		exit;
+	}
+	$_GET['page'] = 'welcome';
+} else {
+	if (!isset($_GET['page'])) {
 		$_GET['page'] = 'main';
-	} else {
-		$_GET['page'] = 'welcome';
 	}
 }
 

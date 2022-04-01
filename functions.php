@@ -73,6 +73,18 @@ function add_message($type, $code, $text, $field = null)
 	];
 }
 
+function no_access() {
+	add_message('warning', 1, 'Nie masz uprawnień do wykonania tej akcji! Przekierowano na stronę główną.');
+	header('Location: index.php');
+	exit;
+}
+
+function not_logged_in() {
+	add_message('warning', 2, 'Musisz być zalogowany.');
+	header('Location: index.php');
+	exit;
+}
+
 function show_messages($cls)
 {
 	if (!isset($_SESSION['messages'])) {

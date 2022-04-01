@@ -2,6 +2,11 @@
 
 db_connect();
 
+if (is_logged_in()) {
+	header('Location: index.php');
+	exit;
+}
+
 $fields = [
 	'reg-username',
 	'reg-email',
@@ -46,6 +51,6 @@ try {
 	}
 }
 
-add_message('success', 3, 'Zostałeś zajerestrowany');
-header('Location: ?page=welcome');
+add_message('success', 3, 'Zostałeś zajerestrowany. Możesz się teraz zalogować.');
+header('Location: index.php');
 exit;

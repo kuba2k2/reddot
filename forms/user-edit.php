@@ -3,8 +3,24 @@
 db_connect();
 
 if (!can_edit($_POST['user-edit-id'])) {
-	header('Location: index.php');
-	exit;
+	no_access();
+}
+
+if (isset($_POST['form-user-remove']) && isset($_POST['user-edit-id'])) {
+	if (!is_admin()) {
+		no_access();
+	}
+
+	$stmt = $db->prepare('DELETE FROM users WHERE user_id = ?;');
+	$stmt->execute([$_POST['user-edit-id']]);
+	if ($stmt->rowCount() == 0) {
+		add_message('danger', 3, 'Nie udało się usunąć konta, spróbuj ponownie później');
+		return;
+	} else {
+		add_message('success', 3, 'Usunięto konto użytkownika.');
+		header('Location: index.php');
+		exit;
+	}
 }
 
 $fields = [
