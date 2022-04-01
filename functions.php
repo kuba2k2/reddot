@@ -8,9 +8,14 @@ function db_connect()
 	global $db;
 	if ($db)
 		return;
-	$db = new PDO('mysql:host=localhost;port=3306;dbname=reddot', 'root', 'zaq1@WSX');
-	if (!$db) {
-		add_message('danger', 1, 'Nie ma bazy :(');
+	try {
+		$db = new PDO('mysql:host=localhost;port=3306;dbname=reddot', 'reddot', 'zaq1@WSX');
+	} catch (PDOException $e) {
+		if (!$db) {
+			add_message('danger', 1, 'Nie ma bazy :(');
+			show_messages('');
+			exit;
+		}
 	}
 }
 
