@@ -45,7 +45,7 @@ if (isset($_POST['form-post-remove']) && isset($_POST['post-remove-id'])) {
 
 	foreach ($_FILES as $file) {
 		$basename = basename($file["name"]);
-		$basename = preg_replace('/[^A-z0-9-_.]/', '', $basename);
+		$basename = preg_replace('/[^A-z0-9-_.]/', '_', $basename);
 		$target_file = 'pics/' . time() . '_' . $basename;
 		$image_info = getimagesize($file["tmp_name"]);
 

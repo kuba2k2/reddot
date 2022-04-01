@@ -23,7 +23,7 @@ if (!is_form_complete($fields)) {
 
 if (isset($_FILES['user-picture'])) {
 	$basename = basename($_FILES["user-picture"]["name"]);
-	$basename = preg_replace('/[^A-z0-9-_.]/', '', $basename);
+	$basename = preg_replace('/[^A-z0-9-_.]/', '_', $basename);
 	$target_file = 'pfp/' . time() . '_' . $basename;
 	$image_info = getimagesize($_FILES["user-picture"]["tmp_name"]);
 	// ඞ
