@@ -55,11 +55,19 @@
 							fix_pfp($row);
 						?>
 							<div class="d-flex flex-start <?= $cls ?>">
-								<div class="rounded-circle shadow-1-strong me-3 user-image big" style="background-image: url(<?= $row['pfp'] ?>);"></div>
+								<form class="d-flex flex-column" method="POST">
+									<div class="rounded-circle shadow-1-strong user-image big me-3" style="background-image: url(<?= $row['pfp'] ?>);"></div>
+									<?php if (can_edit($row['user_id'])) { ?>
+										<button class="btn me-3" name="form-comment-remove"><i class="bi bi-trash"></i></button>
+										<input type="hidden" name="comment-remove-id" value="<?= $row['com_id'] ?>">
+										<input type="hidden" name="post-id" value="<?= $row['post_id'] ?>">
+									<?php } ?>
+								</form>
 								<div class="flex-grow-1 flex-shrink-1 comment-text">
 									<div class="d-flex justify-content-between align-items-center">
 										<p class="mb-1">
-											<?= $row['login'] ?> <span class="small">- <?= $row['date_added'] ?></span>
+											<a href="?page=details&user-id=<?= $row['user_id'] ?>" class="a-black"><?= $row['login'] ?></a>
+											<span class="small">- <?= $row['date_added'] ?></span>
 										</p>
 									</div>
 									<p class="small mb-0">

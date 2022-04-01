@@ -11,7 +11,7 @@ if (isset($_POST['form-post']) || isset($_POST['form-post-remove']))
 	include 'forms/post.php';
 if (isset($_POST['form-user-edit']))
 	include 'forms/user-edit.php';
-if (isset($_POST['form-comment']))
+if (isset($_POST['form-comment']) || isset($_POST['form-comment-remove']))
 	include 'forms/comment.php';
 
 if (isset($_GET['logout'])) {

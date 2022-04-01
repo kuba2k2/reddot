@@ -7,23 +7,22 @@ if (!is_logged_in()) {
 	exit;
 }
 
-/*if (isset($_POST['form-post-remove']) && isset($_POST['post-remove-id'])) {
-	$stmt = $db->prepare('DELETE FROM posts WHERE (user_id = ? OR 1 = ?) AND post_id = ?;');
+if (isset($_POST['form-comment-remove']) && isset($_POST['comment-remove-id']) && isset($_POST['post-id'])) {
+	$stmt = $db->prepare('DELETE FROM comments WHERE (user_id = ? OR 1 = ?) AND com_id = ?;');
 	$stmt->execute([
 		$_SESSION['user_id'],
 		is_admin(),
-		$_POST['post-remove-id'],
+		$_POST['comment-remove-id'],
 	]);
 
 	if ($stmt->rowCount() == 1) {
-		add_message('info', 10, 'Post został usunięty.');
-		header('Location: index.php');
+		add_message('info', 10, 'Komentarz został usunięty.');
+		header('Location: ?page=post&post-id=' . $_POST['post-id']);
 		exit;
 	} else {
-		add_message('danger', 10, 'Nie udało się usunąć postu.');
+		add_message('danger', 10, 'Nie udało się usunąć komentarza.');
 	}
-} else*/
-if (isset($_POST['form-comment']) && isset($_POST['text'])) {
+} elseif (isset($_POST['form-comment']) && isset($_POST['text'])) {
 
 	$stmt = $db->prepare("INSERT INTO `comments`(`post_id`, `user_id`, `text`) VALUES (?,?,?)"); // ඞ
 	$stmt->execute([
@@ -33,8 +32,8 @@ if (isset($_POST['form-comment']) && isset($_POST['text'])) {
 	]);
 
 	if ($stmt->rowCount() == 1) {
-	    add_message('success', 10, 'Komentarz został dodany!');
-		header('Location: ?page=post&post-id='.$_POST['post_id']); // ඞ
+		add_message('success', 10, 'Komentarz został dodany!');
+		header('Location: ?page=post&post-id=' . $_POST['post_id']); // ඞ
 	} else {
 		add_message('danger', 10, 'Nie udało się zapisać komentarza.');
 	}
