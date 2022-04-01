@@ -9,7 +9,7 @@ if (isset($_POST['form-register']))
 	include 'forms/reg.php';
 if (isset($_POST['form-post']) || isset($_POST['form-post-remove']))
 	include 'forms/post.php';
-if (isset($_POST['form-user-edit']))
+if (isset($_POST['form-user-edit']) || isset($_POST['form-user-remove']))
 	include 'forms/user-edit.php';
 if (isset($_POST['form-comment']) || isset($_POST['form-comment-remove']))
 	include 'forms/comment.php';
