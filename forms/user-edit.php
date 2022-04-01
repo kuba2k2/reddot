@@ -21,7 +21,7 @@ if (!is_form_complete($fields)) {
 	return;
 }
 
-if (isset($_FILES['user-picture'])) {
+if (isset($_FILES['user-picture']) && $_FILES['user-picture']['name']) {
 	$basename = basename($_FILES["user-picture"]["name"]);
 	$basename = preg_replace('/[^A-z0-9-_.]/', '_', $basename);
 	$target_file = 'pfp/' . time() . '_' . $basename;
